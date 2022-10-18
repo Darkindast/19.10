@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+void del(int *mas, int *s, int t)
+{
+    int k = *s;
+    mas = (int *)realloc((void *)mas,(*s = *s + t)*sizeof(int));
+    for(int i=k; i<*s; i++){
+        mas[i] = 0;
+    }
+    for(int i=0; i<*s; i++){
+        printf("%d ", mas[i]);
+   
+}
+}
+int main ()
+{
+    int n=0, i, a= 0, t =0;
+    int *mass;  
+    printf("Введите количество элементов в массиве:\n");
+    scanf("%d", &n);
+    mass=(int*)malloc((n)*sizeof(int));
+    if (mass == NULL){ //*Проверяем выделиласть память или нет
+        exit;
+    } 
+    printf("Введите сначала индекс элемента массива, затем сам элемент:\n");
+    
+    for(i=0; i<n; i++) { 
+        scanf("%d",&a);
+        if (a > n-1){
+            t = a - (n - 1);
+            del(mass, &n, t);
+        }
+        scanf("%d",&mass[a]);
+        
+    }
+    printf("Начальный массив: ");
+    for(i=0; i<n; i++)
+        printf("%d ", mass[i]);
+    printf("\n");
+    
+
+    free(mass);
+    return 0;
+}
