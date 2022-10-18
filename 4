@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void add(int *mas, int *s, int t)
+{
+    int k = *s;
+    mas = (int *)realloc((int *)mas,(*s = *s + t)*sizeof(int));
+    for(int i=k; i<*s; i++){
+        mas[i] = 0;
+    }
+    for(int i=0; i<*s; i++){
+        printf("%d ", mas[i]);
+
+}
+}
+
+
+
+void del(int *mas, int *s, int a)
+{
+    int k = *s, tmp = 0;
+    mas = (int *)realloc((void *)mas,(*s = *s + 1)*sizeof(int));
+    mas[*s-1] = 0;
+    for (int i = *s-1; i >=a; i--){
+        tmp = mas[i], mas[i] = mas[i -1], tmp = mas[i-1];
+    }
+    mas[a-1] = 0;
+   
+}
+int main ()
+{
+    int n=0, i, a= 0, t =0;
+    int *mass;
+    printf("Введите количество элементов в массиве:\n");
+    scanf("%d", &n);
+    mass=(int*)malloc((n)*sizeof(int));
+    for(i=0; i<n; i++)
+        mass[i]= 0;
+    printf("Введите сначала индекс элемента массива, затем сам элемент:\n");
+
+    for(i=0; i<n; i++) {
+        scanf("%d",&a);
+        
+        if (mass[a] != 0){
+            del(mass, &n, a);
+            
+        }
+        scanf("%d",&mass[a]);
+
+    }
+    printf("Начальный массив: ");
+    for(i=0; i<n; i++)
+        printf("%d ", mass[i]);
+    printf("\n");
+
+
+    free(mass);
+    return 0;
+}
